@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="cs" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FARMAO.cz – Farmářský marketplace & magazín</title>
+  <meta name="description" content="FARMAO.cz – propojujeme lokální farmáře a zákazníky. Čerstvé potraviny, sezónní boxy, sazenice, krmiva a služby. Najdi farmu ve svém kraji." />
+
+  <!-- Google Fonts (CZ diakritika) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Montserrat', 'Roboto', 'ui-sans-serif', 'system-ui'],
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#4CAF50',
+              dark: '#2e7d32',
+              light: '#81C784',
+            },
+            earth: {
+              DEFAULT: '#8D6E63',
+              light: '#BCAAA4',
+            }
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(0,0,0,.06)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Minimal helper to keep mobile menu on screen */
+    .mobile-nav-enter{opacity:0;transform:translateY(-8px)}
+    .mobile-nav-enter-active{opacity:1;transform:translateY(0);transition:all .18s ease}
+  </style>
+</head>
+<body class="font-sans bg-gradient-to-b from-white to-emerald-50/30 text-slate-900">
+  <!-- Top Bar -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-emerald-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-2xl bg-brand text-white grid place-items-center shadow-soft">
+          <!-- Leaf badge / simple logo -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 13c6-8 16-8 16 0 0 5-4 8-8 8S4 18 4 13Z" fill="currentColor"/>
+            <path d="M12 7c-1.5 3-1.5 6 0 9" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="leading-tight">
+          <div class="font-extrabold text-xl tracking-tight">FARMAO.cz</div>
+          <div class="text-xs -mt-0.5 text-slate-600">Hrdina vaší farmy a zahrady</div>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 font-medium">
+        <a href="#kategorie" class="hover:text-brand">Kategorie</a>
+        <a href="#trh" class="hover:text-brand">Marketplace</a>
+        <a href="#kraje" class="hover:text-brand">Kraje</a>
+        <a href="#magazin" class="hover:text-brand">Magazín</a>
+        <a href="#kontakt" class="hover:text-brand">Kontakt</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-2">
+        <a href="#pridat" class="px-3 py-2 rounded-xl border border-brand/20 hover:border-brand bg-white hover:bg-emerald-50 text-brand font-semibold">Přidat farmu</a>
+        <a href="#cta" class="px-3 py-2 rounded-xl bg-brand hover:bg-brand-dark text-white font-semibold shadow-soft">Objednat box</a>
+      </div>
+
+      <!-- Mobile burger -->
+      <button id="burger" class="md:hidden p-2 rounded-xl border bg-white border-slate-200" aria-label="Otevřít menu" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobileNav" class="md:hidden hidden mobile-nav-enter bg-white/95 border-t border-emerald-100">
+      <div class="px-4 py-3 grid gap-2">
+        <a href="#kategorie" class="px-3 py-2 rounded-lg hover:bg-emerald-50">Kategorie</a>
+        <a href="#trh" class="px-3 py-2 rounded-lg hover:bg-emerald-50">Marketplace</a>
+        <a href="#kraje" class="px-3 py-2 rounded-lg hover:bg-emerald-50">Kraje</a>
+        <a href="#magazin" class="px-3 py-2 rounded-lg hover:bg-emerald-50">Magazín</a>
+        <div class="h-px bg-emerald-100 my-1"></div>
+        <a href="#pridat" class="px-3 py-2 rounded-lg border border-brand/20 hover:bg-emerald-50 text-brand font-semibold">Přidat farmu</a>
+        <a href="#cta" class="px-3 py-2 rounded-lg bg-brand text-white font-semibold">Objednat box</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="relative overflow-hidden">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
+          Čerstvá síla z <span class="text-brand">lokálních farem</span>
+        </h1>
+        <p class="mt-4 text-lg text-slate-700 max-w-prose">
+          Propojujeme farmáře a zákazníky. Objednej si sezónní box, najdi nejbližší farmu nebo si přečti, jak pěstovat lépe.
+        </p>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <a href="#trh" class="px-5 py-3 rounded-2xl bg-brand hover:bg-brand-dark text-white font-semibold shadow-soft">Prohlédnout nabídku</a>
+          <a href="#pridat" class="px-5 py-3 rounded-2xl border border-slate-300 hover:border-brand bg-white hover:bg-emerald-50 font-semibold">Jsem farmář</a>
+        </div>
+        <div class="mt-6 flex items-center gap-6 text-sm text-slate-600">
+          <div class="flex items-center gap-2"><i data-lucide="leaf"></i>Bez zbytečných obalů</div>
+          <div class="flex items-center gap-2"><i data-lucide="truck"></i>Doručení v kraji</div>
+          <div class="flex items-center gap-2"><i data-lucide="shield-check"></i>Ověřené farmy</div>
+        </div>
+      </div>
+      <div class="relative">
+        <!-- Decorative farm-style card -->
+        <div class="rounded-3xl border border-emerald-100 bg-white p-6 shadow-soft">
+          <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 grid place-items-center">
+            <div class="text-center">
+              <div class="mx-auto w-20 h-20 rounded-2xl bg-brand text-white grid place-items-center mb-3 shadow-soft">
+                <i data-lucide="wheat"></i>
+              </div>
+              <div class="font-bold text-xl">Sezónní bedýnka</div>
+              <div class="text-slate-600">Zelenina • Ovoce • Bylinky</div>
+            </div>
+          </div>
+          <div class="mt-4 grid grid-cols-3 gap-3 text-center text-sm">
+            <div class="rounded-xl bg-emerald-50 p-3"><div class="font-bold">+25%</div><div class="text-slate-600">čerstvost</div></div>
+            <div class="rounded-xl bg-emerald-50 p-3"><div class="font-bold">-18%</div><div class="text-slate-600">odpad</div></div>
+            <div class="rounded-xl bg-emerald-50 p-3"><div class="font-bold">100%</div><div class="text-slate-600">lokální</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kategorie -->
+  <section id="kategorie" class="py-12 md:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between mb-6">
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Kategorie</h2>
+        <a href="#trh" class="text-brand font-semibold hover:underline">Zobrazit vše</a>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <!-- Item -->
+        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand focus:outline-none">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="egg"></i></div>
+          <div class="font-semibold">Vejce</div>
+          <div class="text-xs text-slate-600">domácí chov</div>
+        </a>
+        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="beef"></i></div>
+          <div class="font-semibold">Maso</div>
+          <div class="text-xs text-slate-600">hovězí, vepřové, drůbež</div>
+        </a>
+        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="milk"></i></div>
+          <div class="font-semibold">Mléčné</div>
+          <div class="text-xs text-slate-600">mléko, jogurt, sýry</div>
+        </a>
+        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="salad"></i></div>
+          <div class="font-semibold">Zelenina</div>
+          <div class="text-xs text-slate-600">sazenice & sklizeň</div>
+        </a>
+        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="apple"></i></div>
+          <div class="font-semibold">Ovoce</div>
+          <div class="text-xs text-slate-600">čerstvé & sušené</div>
+        </a>
+        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="sprout"></i></div>
+          <div class="font-semibold">Sazenice</div>
+          <div class="text-xs text-slate-600">bylinky, stromky</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marketplace preview -->
+  <section id="trh" class="py-12 md:py-16 bg-white/70 border-y border-emerald-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Marketplace – aktuální nabídka</h2>
+          <p class="text-slate-700">Filtrovat podle kategorie a kraje.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:flex gap-2">
+          <select class="px-3 py-2 rounded-xl border border-slate-300 bg-white">
+            <option>Všechny kategorie</option>
+            <option>Vejce</option>
+            <option>Maso</option>
+            <option>Mléčné</option>
+            <option>Zelenina</option>
+            <option>Ovoce</option>
+            <option>Sazenice</option>
+          </select>
+          <select class="px-3 py-2 rounded-xl border border-slate-300 bg-white">
+            <option>Celá ČR</option>
+            <option>Zlínský kraj</option>
+            <option>Jihomoravský kraj</option>
+            <option>Moravskoslezský kraj</option>
+            <option>Olomoucký kraj</option>
+            <option>Praha</option>
+          </select>
+          <button class="px-4 py-2 rounded-xl bg-brand text-white font-semibold">Filtrovat</button>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Card 1 -->
+        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
+          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center">
+            <i data-lucide="egg" class="w-7 h-7"></i>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-lg">Domácí vejce z volného chovu</h3>
+            <div class="text-sm text-slate-600">Uherské Hradiště • od 95 Kč/10 ks</div>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-semibold">Vejce</span>
+              <button class="px-3 py-1.5 rounded-lg bg-brand text-white text-sm font-semibold">Detail</button>
+            </div>
+          </div>
+        </article>
+        <!-- Card 2 -->
+        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
+          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center">
+            <i data-lucide="beef" class="w-7 h-7"></i>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-lg">Hovězí balíčky – čtvrtky</h3>
+            <div class="text-sm text-slate-600">Zlín • od 199 Kč/kg</div>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-semibold">Maso</span>
+              <button class="px-3 py-1.5 rounded-lg bg-brand text-white text-sm font-semibold">Detail</button>
+            </div>
+          </div>
+        </article>
+        <!-- Card 3 -->
+        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
+          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center">
+            <i data-lucide="milk" class="w-7 h-7"></i>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-lg">Selské mléko & čerstvé sýry</h3>
+            <div class="text-sm text-slate-600">Brno-venkov • od 35 Kč/l</div>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-semibold">Mléčné</span>
+              <button class="px-3 py-1.5 rounded-lg bg-brand text-white text-sm font-semibold">Detail</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="#" class="px-5 py-3 rounded-2xl border border-slate-300 hover:border-brand bg-white hover:bg-emerald-50 font-semibold">Zobrazit další nabídky</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kraje / geolokace -->
+  <section id="kraje" class="py-12 md:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-6">Najdi farmu ve svém kraji</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <!-- Simple region chips -->
+        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Zlínský</button>
+        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Jihomoravský</button>
+        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Moravskoslezský</button>
+        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Olomoucký</button>
+        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Praha</button>
+        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Středočeský</button>
+      </div>
+      <p class="text-slate-600 text-sm mt-3">Tip: povol geolokaci v prohlížeči a ukážeme ti nejbližší farmy.</p>
+    </div>
+  </section>
+
+  <!-- Magazín -->
+  <section id="magazin" class="py-12 md:py-16 bg-white/70 border-y border-emerald-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between mb-6">
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Magazín FARMAO</h2>
+        <a href="#" class="text-brand font-semibold hover:underline">Číst vše</a>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
+          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center"><i data-lucide="sprout"></i></div>
+          <div class="p-4">
+            <h3 class="font-bold text-lg">Kdy sázet zimní česnek</h3>
+            <p class="text-slate-700 text-sm mt-1">Praktický kalendář výsadby a péče o půdu.</p>
+          </div>
+        </article>
+        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
+          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center"><i data-lucide="droplets"></i></div>
+          <div class="p-4">
+            <h3 class="font-bold text-lg">Závlaha na zahradě: co dává smysl</h3>
+            <p class="text-slate-700 text-sm mt-1">Hadice, kapkovka, sudy – srovnání možností.</p>
+          </div>
+        </article>
+        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
+          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center"><i data-lucide="wheat"></i></div>
+          <div class="p-4">
+            <h3 class="font-bold text-lg">Kompost: jednoduchý návod</h3>
+            <p class="text-slate-700 text-sm mt-1">Jak založit kompost a urychlit rozklad.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA: Přidat farmu / Objednat box -->
+  <section id="cta" class="py-12 md:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6 items-center">
+      <div class="rounded-3xl border border-emerald-100 bg-white p-6 shadow-soft">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-brand text-white grid place-items-center"><i data-lucide="store"></i></div>
+          <h3 class="font-extrabold text-xl">Jsem farmář – chci prodávat</h3>
+        </div>
+        <p class="text-slate-700 mt-2">Získáš vlastní profil, přidáš produkty a nastavíš doručení v okolí.</p>
+        <form id="pridat" class="mt-4 grid sm:grid-cols-2 gap-3">
+          <input type="text" placeholder="Název farmy" class="px-3 py-2 rounded-xl border border-slate-300 bg-white" />
+          <input type="text" placeholder="Kraj" class="px-3 py-2 rounded-xl border border-slate-300 bg-white" />
+          <input type="email" placeholder="Email" class="px-3 py-2 rounded-xl border border-slate-300 bg-white sm:col-span-2" />
+          <button type="button" class="px-4 py-2 rounded-xl bg-brand text-white font-semibold">Založit profil</button>
+        </form>
+      </div>
+      <div class="rounded-3xl border border-emerald-100 bg-white p-6 shadow-soft">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-brand text-white grid place-items-center"><i data-lucide="shopping-basket"></i></div>
+          <h3 class="font-extrabold text-xl">Chci bedýnku – nejbližší rozvoz</h3>
+        </div>
+        <p class="text-slate-700 mt-2">Zadej PSČ a zjisti nejbližší termín rozvozu ve tvém kraji.</p>
+        <form class="mt-4 grid sm:grid-cols-[1fr_auto] gap-3">
+          <input type="text" placeholder="PSČ (např. 68601)" class="px-3 py-2 rounded-xl border border-slate-300 bg-white" />
+          <button type="button" class="px-4 py-2 rounded-xl bg-brand text-white font-semibold">Zkontrolovat</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt / Footer -->
+  <footer id="kontakt" class="mt-6 border-t border-emerald-100 bg-white/70">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-brand text-white grid place-items-center">
+            <i data-lucide="leaf"></i>
+          </div>
+          <div>
+            <div class="font-extrabold text-lg">FARMAO.cz</div>
+            <div class="text-sm text-slate-600">Součást AO Group</div>
+          </div>
+        </div>
+        <p class="text-slate-700 mt-3 text-sm">Marketplace a magazín pro farmáře, zahrady a lokální výrobu. Podporujeme férový prodej z dvora.</p>
+      </div>
+      <div>
+        <div class="font-bold mb-2">Navigace</div>
+        <ul class="space-y-1 text-sm">
+          <li><a href="#kategorie" class="hover:text-brand">Kategorie</a></li>
+          <li><a href="#trh" class="hover:text-brand">Marketplace</a></li>
+          <li><a href="#kraje" class="hover:text-brand">Kraje</a></li>
+          <li><a href="#magazin" class="hover:text-brand">Magazín</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-bold mb-2">Odběr novinek</div>
+        <form class="grid grid-cols-[1fr_auto] gap-2">
+          <input type="email" placeholder="Váš e‑mail" class="px-3 py-2 rounded-xl border border-slate-300 bg-white" />
+          <button class="px-4 py-2 rounded-xl bg-brand text-white font-semibold">Odebírat</button>
+        </form>
+        <p class="text-xs text-slate-600 mt-2">Souhlasím se zpracováním osobních údajů pro zasílání newsletteru.</p>
+      </div>
+    </div>
+    <div class="border-t border-emerald-100 py-4 text-center text-sm text-slate-600">© <span id="year"></span> FARMAO.cz – Všechna práva vyhrazena.</div>
+  </footer>
+
+  <script>
+    // Icons
+    lucide.createIcons();
+
+    // Burger logic
+    const burger = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobileNav');
+    burger?.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.contains('hidden') === false;
+      mobileNav.classList.toggle('hidden');
+      burger.setAttribute('aria-expanded', String(!isOpen));
+      // close on navigation click
+      mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        mobileNav.classList.add('hidden');
+        burger.setAttribute('aria-expanded', 'false');
+      }));
+    });
+
+    // Close on scroll down to keep menu visible at top only
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 120) mobileNav.classList.add('hidden');
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
