@@ -134,14 +134,28 @@
     .btn-light{background:#fff;color:#191f19;border:1px solid var(--line)}
 
     .hero-art{
-      position:relative;min-height:620px;border-radius:36px;overflow:hidden;
-      background:
-        radial-gradient(circle at 68% 14%, rgba(255,245,214,.95), rgba(255,245,214,0) 16%),
-        radial-gradient(circle at 76% 14%, rgba(255,255,255,.75), rgba(255,255,255,0) 29%),
-        radial-gradient(circle at 76% 20%, rgba(255,255,255,.35), rgba(255,255,255,0) 34%),
-        linear-gradient(180deg,#f4f5ef,#edf2e7);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.8);
-    }
+  position:relative;
+  min-height:620px;
+  border-radius:36px;
+  overflow:hidden;
+
+  background:
+    radial-gradient(circle at 70% 15%, rgba(255,255,255,.6), rgba(255,255,255,0) 30%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,.4), rgba(255,255,255,0) 40%),
+    url('/images/hero.png') center/cover no-repeat;
+
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.6);
+}
+
+.hero-art::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg, rgba(255,255,255,.6), rgba(255,255,255,0));
+  pointer-events:none;
+}ba(255,255,255,.6), rgba(255,255,255,0));
+  pointer-events:none;
+}
     .hero-arc{
       position:absolute;right:-70px;top:-15px;width:680px;height:680px;border-radius:50%;
       box-shadow:0 0 0 20px rgba(255,251,234,.65),0 0 140px rgba(255,243,209,.55) inset;
@@ -211,10 +225,18 @@
     .trust-bubble .leaf-line{font-size:26px;opacity:.9}
 
     .trust-row{
-      margin-top:16px;background:#fff;border-radius:22px;padding:22px 26px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+      margin-top:16px;background:#fff;border-radius:22px;padding:22px 26px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;gap:16px;
       box-shadow:var(--shadow);border:1px solid var(--line)
     }
-    .trust-item{display:flex;align-items:center;gap:14px;padding:10px 8px}
+    .trust-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:10px;
+  padding:12px 8px;
+}
     .trust-icon{width:52px;height:52px;border-radius:50%;background:#f4f8ef;display:grid;place-items:center;color:var(--green);flex:0 0 auto}
     .trust-icon svg{width:26px;height:26px}
     .trust-item strong{display:block;font-size:15px;font-weight:800;letter-spacing:-.03em}
@@ -353,6 +375,7 @@
     }
 
     @media (max-width: 960px){
+      .cart-wrap span{display:none;}
       .topbar{display:none}
       .nav-inner{grid-template-columns:1fr auto;height:88px}
       .nav-links{display:none}
@@ -425,9 +448,7 @@
         <button class="icon-btn" aria-label="Oblíbené">
           <svg fill="none" viewBox="0 0 24 24"><path d="m12 20-7-7a4.5 4.5 0 0 1 6.4-6.3L12 7.3l.6-.6A4.5 4.5 0 1 1 19 13l-7 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <button class="icon-btn" aria-label="Košík mini">
-          <svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg>
-        </button>
+        
         <div class="cart-wrap">
           <button class="icon-btn" aria-label="Košík">
             <span class="cart-badge">0</span>
@@ -606,85 +627,4 @@
 
     <section id="produkty" class="container product-row">
       <div class="section-head">
-        <div>
-          <small>Doporučujeme</small>
-          <h2>To nejlepší pro vaše pěstování</h2>
-          <p>Pečlivě vybíráme produkty nejvyšší kvality.</p>
-        </div>
-        <a href="#" class="ghost-btn">Zobrazit všechny produkty
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <a href="#" class="side-arrow left" aria-label="Předchozí">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="m15 6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="#" class="side-arrow right" aria-label="Další">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-
-      <div class="products">
-        <article class="product">
-          <div class="product-visual"><div class="tent"></div></div>
-          <h4>Pěstební stan Probox 120x120x200cm</h4>
-          <div class="price">2 990 Kč</div>
-          <div class="stock">Skladem</div>
-          <a href="#" class="buy-btn" aria-label="Přidat do košíku"><svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg></a>
-        </article>
-        <article class="product">
-          <div class="product-visual"><div class="light-frame"></div></div>
-          <h4>LED světlo Lumatek ATS200W PRO</h4>
-          <div class="price">5 990 Kč</div>
-          <div class="stock">Skladem</div>
-          <a href="#" class="buy-btn" aria-label="Přidat do košíku"><svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg></a>
-        </article>
-        <article class="product">
-          <div class="product-visual"><div class="bucket"></div></div>
-          <h4>AutoPot Easy2Grow systém 8 květináčů</h4>
-          <div class="price">4 890 Kč</div>
-          <div class="stock">Skladem</div>
-          <a href="#" class="buy-btn" aria-label="Přidat do košíku"><svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg></a>
-        </article>
-        <article class="product">
-          <div class="product-visual"><div class="bottle-green"></div></div>
-          <h4>Hnojivo Canna Terra Professional 1L</h4>
-          <div class="price">399 Kč</div>
-          <div class="stock">Skladem</div>
-          <a href="#" class="buy-btn" aria-label="Přidat do košíku"><svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg></a>
-        </article>
-        <article class="product">
-          <div class="product-visual"><div class="fan"></div></div>
-          <h4>Ventilátor Prima Klima 125mm / 220 m³/h</h4>
-          <div class="price">2 190 Kč</div>
-          <div class="stock">Skladem</div>
-          <a href="#" class="buy-btn" aria-label="Přidat do košíku"><svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg></a>
-        </article>
-      </div>
-      <div class="mobile-note">Mobilní slider a napojení na data ze Supabase doplníme v další vrstvě. Vizuálně je homepage připravená 1:1 podle návrhu.</div>
-    </section>
-
-    <div class="footer-space"></div>
-  </main>
-
-  <script>
-    // Demo struktura pro pozdější napojení na Supabase / GitHub deployment
-    window.FARMAO_CONFIG = {
-      supabaseUrl: "YOUR_SUPABASE_URL",
-      supabaseAnonKey: "YOUR_SUPABASE_ANON_KEY",
-      tables: {
-        products: "products",
-        categories: "categories",
-        stats: "stats",
-        promo_cards: "promo_cards"
-      }
-    };
-
-    // Jemné hover microinteractions
-    document.querySelectorAll('.product, .promo-card, .btn, .ghost-btn, .cat, .trust-item').forEach((el) => {
-      el.addEventListener('mouseenter', () => el.style.transform = 'translateY(-2px)');
-      el.addEventListener('mouseleave', () => el.style.transform = 'translateY(0)');
-      el.style.transition = 'transform .2s ease, box-shadow .2s ease';
-    });
-  </script>
-</body>
-</html>
+ 
