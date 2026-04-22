@@ -1,432 +1,690 @@
-<!doctype html>
-<html lang="cs" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="cs">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FARMAO.cz – Farmářský marketplace & magazín</title>
-  <meta name="description" content="FARMAO.cz – propojujeme lokální farmáře a zákazníky. Čerstvé potraviny, sezónní boxy, sazenice, krmiva a služby. Najdi farmu ve svém kraji." />
-
-  <!-- Google Fonts (CZ diakritika) -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farmao.cz – 1:1 homepage</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Montserrat', 'Roboto', 'ui-sans-serif', 'system-ui'],
-          },
-          colors: {
-            brand: {
-              DEFAULT: '#4CAF50',
-              dark: '#2e7d32',
-              light: '#81C784',
-            },
-            earth: {
-              DEFAULT: '#8D6E63',
-              light: '#BCAAA4',
-            }
-          },
-          boxShadow: {
-            soft: '0 10px 30px rgba(0,0,0,.06)'
-          }
-        }
-      }
-    }
-  </script>
-
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* Minimal helper to keep mobile menu on screen */
-    .mobile-nav-enter{opacity:0;transform:translateY(-8px)}
-    .mobile-nav-enter-active{opacity:1;transform:translateY(0);transition:all .18s ease}
+    :root{
+      --bg:#f7f8f4;
+      --card:#ffffff;
+      --text:#101511;
+      --muted:#5d655c;
+      --line:#e6ebe1;
+      --green:#4d8d23;
+      --green-dark:#1d3513;
+      --green-soft:#eef4e8;
+      --black:#091008;
+      --shadow:0 10px 30px rgba(16,21,17,.06);
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --container:1450px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    img{display:block;max-width:100%}
+    .container{width:min(calc(100% - 48px),var(--container));margin:0 auto}
+
+    .topbar{
+      background:#071006;
+      color:#e7f4df;
+      font-size:14px;
+      height:42px;
+      display:flex;
+      align-items:center;
+    }
+    .topbar-inner{
+      display:flex;justify-content:space-between;align-items:center;gap:24px;
+    }
+    .topbar-left,.topbar-right{display:flex;align-items:center;gap:28px;white-space:nowrap}
+    .mini{display:flex;align-items:center;gap:9px;opacity:.98}
+    .mini svg{width:16px;height:16px;stroke:#74bf45}
+
+    .navbar{
+      background:#fff;
+      border-bottom:1px solid rgba(230,235,225,.85);
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(180%) blur(18px);
+    }
+    .nav-inner{
+      height:108px;
+      display:grid;
+      grid-template-columns:280px 1fr 220px;
+      align-items:center;
+      gap:16px;
+    }
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand-mark{
+      width:58px;height:58px;border-radius:18px;
+      display:grid;place-items:center;
+      background:linear-gradient(180deg,#72b343,#4f8e25);
+      box-shadow:0 10px 22px rgba(77,141,35,.22);
+      color:#fff;
+    }
+    .brand-text strong{display:block;font-size:25px;line-height:1;font-weight:900;letter-spacing:-.03em}
+    .brand-text span{display:block;margin-top:4px;color:#70796d;font-size:13px;font-weight:500}
+
+    .nav-links{display:flex;justify-content:center;gap:38px;font-weight:700;font-size:19px;letter-spacing:-.02em}
+    .nav-links a{position:relative}
+    .nav-links a:hover{color:var(--green)}
+    .nav-icons{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+    .icon-btn{
+      width:42px;height:42px;border-radius:999px;border:1px solid transparent;
+      display:grid;place-items:center;background:transparent;cursor:pointer;position:relative;
+      transition:.2s ease;
+    }
+    .icon-btn:hover{background:#f4f7f0;border-color:#e4eadc}
+    .icon-btn svg{width:24px;height:24px;stroke-width:2}
+    .cart-wrap{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700}
+    .cart-badge{
+      position:absolute;right:1px;top:1px;width:18px;height:18px;border-radius:999px;background:var(--green);
+      color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;box-shadow:0 6px 16px rgba(77,141,35,.25)
+    }
+
+    .hero-wrap{padding:20px 0 0}
+    .hero{
+      display:grid;
+      grid-template-columns:1.08fr 1fr;
+      gap:34px;
+      align-items:center;
+      min-height:620px;
+      position:relative;
+    }
+    .hero-copy{padding:20px 0 10px 12px}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;background:#f2f7ec;color:#365f1d;border-radius:999px;
+      padding:9px 16px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.02em;margin-bottom:30px;
+      box-shadow:inset 0 0 0 1px rgba(77,141,35,.08);
+    }
+    .eyebrow .dot{width:9px;height:9px;border-radius:999px;background:var(--green)}
+    h1{
+      margin:0;
+      font-size:90px;
+      line-height:.93;
+      letter-spacing:-.075em;
+      font-weight:900;
+    }
+    h1 .green{color:var(--green)}
+    .hero-text{
+      margin:28px 0 34px;color:#667066;font-size:29px;line-height:1.55;max-width:760px;letter-spacing:-.03em
+    }
+    .hero-actions{display:flex;gap:18px;align-items:center;margin-bottom:42px}
+    .btn{
+      border:none;border-radius:16px;padding:21px 34px;font-size:22px;font-weight:800;cursor:pointer;
+      display:inline-flex;align-items:center;gap:14px;letter-spacing:-.03em;box-shadow:var(--shadow)
+    }
+    .btn-primary{background:var(--green);color:#fff}
+    .btn-primary:hover{background:#41791d}
+    .btn-light{background:#fff;color:#191f19;border:1px solid var(--line)}
+
+    .hero-art{
+      position:relative;min-height:620px;border-radius:36px;overflow:hidden;
+      background:
+        radial-gradient(circle at 68% 14%, rgba(255,245,214,.95), rgba(255,245,214,0) 16%),
+        radial-gradient(circle at 76% 14%, rgba(255,255,255,.75), rgba(255,255,255,0) 29%),
+        radial-gradient(circle at 76% 20%, rgba(255,255,255,.35), rgba(255,255,255,0) 34%),
+        linear-gradient(180deg,#f4f5ef,#edf2e7);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.8);
+    }
+    .hero-arc{
+      position:absolute;right:-70px;top:-15px;width:680px;height:680px;border-radius:50%;
+      box-shadow:0 0 0 20px rgba(255,251,234,.65),0 0 140px rgba(255,243,209,.55) inset;
+      border:16px solid rgba(255,250,226,.78);filter:blur(.2px)
+    }
+    .window-light{
+      position:absolute;left:8%;top:4%;width:42%;height:94%;
+      background:linear-gradient(180deg,rgba(255,255,255,.0),rgba(255,255,255,.22));
+      clip-path:polygon(28% 0, 78% 0, 58% 100%, 8% 100%);
+      filter:blur(10px);opacity:.95
+    }
+    .grow-rack{
+      position:absolute;right:70px;top:76px;width:380px;height:430px;border-radius:12px;
+      background:linear-gradient(180deg,#a7aca6 0,#7f857f 3%,#535855 8%,#2a302b 100%);
+      box-shadow:0 24px 80px rgba(15,18,14,.2);
+      padding:14px 13px;
+    }
+    .rack-shelf{position:relative;height:95px;border-bottom:10px solid rgba(0,0,0,.24);margin-bottom:14px}
+    .rack-shelf:last-child{margin-bottom:0}
+    .grow-strip{position:absolute;left:8px;right:8px;top:10px;height:16px;border-radius:16px;background:linear-gradient(180deg,#fff8d1,#e7efbe);box-shadow:0 0 36px rgba(255,246,182,.7)}
+    .plant-row{position:absolute;left:10px;right:10px;bottom:12px;height:55px;display:flex;gap:7px;align-items:flex-end}
+    .pot{flex:1;min-width:0;height:28px;background:#1c1d1b;border-radius:4px 4px 6px 6px;position:relative;overflow:visible}
+    .pot::before{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:18px;width:34px;height:38px;background:radial-gradient(circle at 50% 100%, #b9e15f 4%, #8fc546 36%, #629124 65%, rgba(0,0,0,0) 67%);filter:blur(.4px)}
+    .pot:nth-child(2n)::before{height:44px;width:40px}
+    .pot:nth-child(3n)::before{height:34px;width:31px}
+
+    .grow-box{
+      position:absolute;right:328px;bottom:88px;width:190px;height:250px;border-radius:12px;background:#171c19;
+      border:2px solid #2f342f;box-shadow:0 22px 58px rgba(0,0,0,.28)
+    }
+    .grow-box::before,.grow-box::after{
+      content:"";position:absolute;top:18px;bottom:18px;width:72px;border-radius:24px 24px 10px 10px;background:linear-gradient(180deg,#f4f5f2,#dfe6df);box-shadow:inset 0 0 0 2px #666
+    }
+    .grow-box::before{left:12px}
+    .grow-box::after{right:12px}
+    .grow-door{
+      position:absolute;left:96px;top:72px;width:70px;height:106px;border-radius:10px;background:rgba(118,187,64,.14);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(3px)
+    }
+    .grow-door::before{content:"";position:absolute;left:16px;right:16px;top:18px;bottom:18px;background:radial-gradient(circle at 50% 100%, #86bf3f 3%, #5f8e24 44%, rgba(0,0,0,0) 70%)}
+
+    .hero-plants{position:absolute;bottom:84px;left:110px;width:270px;height:240px}
+    .hero-plants .leafy{position:absolute;left:0;bottom:0;width:180px;height:200px;border-radius:90px;background:radial-gradient(circle at 65% 80%, #678f37 8%, #4e6f2a 40%, rgba(0,0,0,0) 68%)}
+    .hero-plants .pot-white{position:absolute;left:24px;bottom:0;width:86px;height:110px;border-radius:0 0 26px 26px;background:linear-gradient(180deg,#fff,#eceee8)}
+    .hero-plants .pot-white::before{content:"";position:absolute;inset:10px 16px auto;height:2px;background:#d9dcd5;box-shadow:0 13px 0 #d9dcd5,0 26px 0 #d9dcd5,0 39px 0 #d9dcd5,0 52px 0 #d9dcd5}
+
+    .front-products{position:absolute;right:102px;bottom:48px;display:flex;align-items:flex-end;gap:16px}
+    .bottle,.jar,.black-bottle{
+      border-radius:12px 12px 16px 16px;background:linear-gradient(180deg,#ffffff,#f2f1ee 65%,#e4e7e0);box-shadow:0 12px 24px rgba(15,18,14,.16);position:relative
+    }
+    .bottle{width:48px;height:118px}
+    .bottle::before{content:"";position:absolute;left:14px;top:-12px;width:20px;height:18px;border-radius:5px;background:#f8faf8}
+    .jar{width:74px;height:90px}
+    .jar::before{content:"";position:absolute;left:9px;right:9px;top:12px;height:28px;border-radius:8px;background:linear-gradient(180deg,#e9f2df,#cfe0bc)}
+    .black-bottle{width:44px;height:120px;background:linear-gradient(180deg,#131818,#0b1010 70%,#1d2222)}
+    .black-bottle::before{content:"";position:absolute;left:12px;top:-10px;width:20px;height:16px;border-radius:5px;background:#0b1010}
+    .planter{width:138px;height:138px;background:linear-gradient(180deg,#232421,#11110f);border-radius:8px 8px 14px 14px;position:relative;box-shadow:0 18px 40px rgba(15,18,14,.25)}
+    .planter::before{content:"";position:absolute;left:10px;right:10px;top:14px;height:24px;border-radius:8px;background:#3d332a}
+    .planter::after{content:"";position:absolute;left:22px;right:22px;bottom:54px;height:82px;background:radial-gradient(circle at 50% 100%,#76a533 8%,#5f8a28 42%,rgba(0,0,0,0) 66%)}
+    .sprinklers{position:absolute;right:40px;bottom:20px;display:flex;gap:10px}
+    .sprinklers span{display:block;width:26px;height:26px;border-radius:8px;background:#171c19;box-shadow:0 10px 22px rgba(0,0,0,.2)}
+    .trust-bubble{
+      position:absolute;right:12px;top:188px;width:210px;height:210px;border-radius:50%;background:#f8fbf4;
+      box-shadow:0 22px 50px rgba(16,21,17,.12), inset 0 0 0 1px rgba(77,141,35,.08);display:grid;place-items:center;text-align:center;padding:18px;color:#2f4922
+    }
+    .trust-bubble .small{font-size:15px;font-weight:700;color:#647263;letter-spacing:-.03em}
+    .trust-bubble .big{font-size:26px;font-weight:900;margin:8px 0 4px;letter-spacing:-.04em}
+    .trust-bubble .leaf-line{font-size:26px;opacity:.9}
+
+    .trust-row{
+      margin-top:16px;background:#fff;border-radius:22px;padding:22px 26px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+      box-shadow:var(--shadow);border:1px solid var(--line)
+    }
+    .trust-item{display:flex;align-items:center;gap:14px;padding:10px 8px}
+    .trust-icon{width:52px;height:52px;border-radius:50%;background:#f4f8ef;display:grid;place-items:center;color:var(--green);flex:0 0 auto}
+    .trust-icon svg{width:26px;height:26px}
+    .trust-item strong{display:block;font-size:15px;font-weight:800;letter-spacing:-.03em}
+    .trust-item span{display:block;margin-top:4px;color:#6b736b;font-size:14px}
+
+    .category-wrap{padding:34px 0 26px}
+    .categories{
+      background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:30px 24px;
+      display:grid;grid-template-columns:repeat(8,1fr);gap:10px
+    }
+    .cat{text-align:center;padding:6px 8px}
+    .cat-icon{width:58px;height:58px;border-radius:50%;background:#f4f8ef;margin:0 auto 16px;display:grid;place-items:center;color:#708562}
+    .cat-icon svg{width:24px;height:24px}
+    .cat strong{display:block;font-size:15px;font-weight:800;line-height:1.2;letter-spacing:-.03em}
+    .cat span{display:block;font-size:14px;color:#737a72;margin-top:6px;line-height:1.25}
+
+    .promo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+    .promo-card{
+      min-height:438px;position:relative;padding:38px 38px 34px;color:#fff;background:
+        radial-gradient(circle at 82% 18%, rgba(95,170,62,.3), rgba(0,0,0,0) 28%),
+        linear-gradient(135deg,#092216,#0e311d 36%,#0e3418 100%);
+      border-right:1px solid rgba(255,255,255,.08)
+    }
+    .promo-card:last-child{border-right:none}
+    .promo-card.market{
+      background:
+        radial-gradient(circle at 92% 86%, rgba(124,209,57,.28), rgba(0,0,0,0) 22%),
+        linear-gradient(135deg,#0a281d 0%,#0a2218 38%,#17371c 100%);
+    }
+    .promo-card.farm{
+      background:
+        radial-gradient(circle at 72% 26%, rgba(137,227,92,.2), rgba(0,0,0,0) 26%),
+        linear-gradient(135deg,#2c6f18 0%,#255b16 34%,#11371a 100%);
+    }
+    .promo-card.dotace{
+      background:
+        radial-gradient(circle at 85% 80%, rgba(247,214,101,.18), rgba(0,0,0,0) 26%),
+        linear-gradient(135deg,#0f2817 0%,#12311a 32%,#153216 100%);
+    }
+    .promo-badge{
+      display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:rgba(218,255,175,.14);
+      color:#d2ff9b;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:22px;border:1px solid rgba(218,255,175,.15)
+    }
+    .promo-card h3{margin:0 0 10px;font-size:28px;line-height:1.03;font-weight:800;letter-spacing:-.05em}
+    .promo-card p{margin:0 0 28px;font-size:16px;line-height:1.5;color:rgba(255,255,255,.85)}
+    .promo-list{display:grid;gap:12px;margin-bottom:28px}
+    .promo-list li{list-style:none;display:flex;align-items:center;gap:12px;font-size:15px;color:rgba(255,255,255,.92)}
+    .promo-list li::before{content:"✓";width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#5eac32;color:#fff;font-weight:900;font-size:13px;flex:0 0 auto}
+    .promo-btn{
+      display:inline-flex;align-items:center;gap:10px;background:#fff;color:#183218;border-radius:14px;padding:16px 20px;font-size:16px;font-weight:800;
+      box-shadow:0 14px 30px rgba(0,0,0,.18)
+    }
+    .crate,
+    .mini-rack,
+    .coins-stack{position:absolute;pointer-events:none}
+    .crate{right:22px;bottom:0;width:190px;height:188px}
+    .crate .box{position:absolute;bottom:0;left:22px;width:160px;height:88px;background:linear-gradient(180deg,#9f6e34,#7f5123);border-radius:6px;box-shadow:0 16px 34px rgba(0,0,0,.22)}
+    .crate .box::before{content:"";position:absolute;inset:14px;border:3px solid rgba(77,42,12,.44);border-left:none;border-right:none}
+    .crate .veg{position:absolute;bottom:68px;left:0;right:0;height:130px;background:radial-gradient(circle at 50% 100%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 24%), radial-gradient(circle at 20% 90%,#a6ca3c 7%,#6f9426 28%,rgba(0,0,0,0) 32%), radial-gradient(circle at 38% 80%,#d94f39 8%,#b83020 24%,rgba(0,0,0,0) 28%), radial-gradient(circle at 57% 82%,#ebb25e 9%,#cb7a23 28%,rgba(0,0,0,0) 31%), radial-gradient(circle at 74% 78%,#3d8f2a 8%,#2f6c1d 28%,rgba(0,0,0,0) 32%), radial-gradient(circle at 44% 24%,#b4dd4d 10%,#7eae30 34%,rgba(0,0,0,0) 39%)}
+    .mini-rack{right:16px;bottom:0;width:235px;height:260px}
+    .mini-rack .rack{position:absolute;right:0;bottom:0;width:200px;height:250px;border-radius:6px;background:linear-gradient(180deg,#6f766f,#212721);padding:10px}
+    .mini-rack .shelf{height:52px;border-bottom:6px solid rgba(0,0,0,.28);margin-bottom:10px;position:relative}
+    .mini-rack .shelf:last-child{margin-bottom:0}
+    .mini-rack .shelf::before{content:"";position:absolute;left:8px;right:8px;top:8px;height:8px;border-radius:10px;background:linear-gradient(180deg,#fff9cf,#ebf4bc);box-shadow:0 0 28px rgba(255,247,176,.5)}
+    .mini-rack .shelf::after{content:"";position:absolute;left:8px;right:8px;bottom:6px;height:22px;background:radial-gradient(circle at 10% 100%,#9fd348 8%,#6f9d2d 28%,rgba(0,0,0,0) 33%), radial-gradient(circle at 30% 100%,#9fd348 8%,#6f9d2d 28%,rgba(0,0,0,0) 33%), radial-gradient(circle at 50% 100%,#9fd348 8%,#6f9d2d 28%,rgba(0,0,0,0) 33%), radial-gradient(circle at 70% 100%,#9fd348 8%,#6f9d2d 28%,rgba(0,0,0,0) 33%), radial-gradient(circle at 90% 100%,#9fd348 8%,#6f9d2d 28%,rgba(0,0,0,0) 33%)}
+    .coins-stack{right:18px;bottom:24px;width:165px;height:170px}
+    .coins-stack .coin{position:absolute;bottom:0;width:54px;border-radius:50px;background:linear-gradient(180deg,#fedc73,#c58d27);box-shadow:0 18px 30px rgba(0,0,0,.18)}
+    .coins-stack .coin::before{content:"";position:absolute;left:0;right:0;top:-7px;height:14px;border-radius:50%;background:linear-gradient(180deg,#ffe6a0,#d1a24a)}
+    .coins-stack .coin.a{left:0;height:56px}
+    .coins-stack .coin.b{left:52px;height:84px}
+    .coins-stack .coin.c{left:104px;height:114px}
+    .coins-stack .sprout{position:absolute;left:104px;bottom:110px;width:74px;height:78px;background:radial-gradient(circle at 50% 100%, #7db33e 7%, #608a2d 40%, rgba(0,0,0,0) 57%)}
+
+    .stats-wrap{padding:28px 0 18px}
+    .stats-title{font-size:18px;font-weight:900;letter-spacing:-.04em;margin:0 0 18px 24px}
+    .stats{
+      background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px 24px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;box-shadow:var(--shadow)
+    }
+    .stat{display:flex;align-items:center;gap:15px;padding:10px 6px}
+    .stat-ic{width:48px;height:48px;border-radius:14px;background:#f4f8ef;display:grid;place-items:center;color:#6d8760}
+    .stat strong{display:block;font-size:16px;font-weight:900;letter-spacing:-.04em}
+    .stat .num{font-size:34px;font-weight:900;color:#294b1b;line-height:.95;letter-spacing:-.05em}
+    .stat span{display:block;color:#727b72;font-size:14px;margin-top:3px;line-height:1.28}
+
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin:28px 0 24px;padding:0 24px}
+    .section-head small{display:block;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#54624b;margin-bottom:12px}
+    .section-head h2{margin:0;font-size:58px;line-height:.95;letter-spacing:-.06em}
+    .section-head p{margin:10px 0 0;font-size:20px;color:#687268;letter-spacing:-.03em}
+    .ghost-btn{
+      background:#fff;border:1px solid var(--line);border-radius:16px;padding:19px 24px;font-weight:800;font-size:18px;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:12px
+    }
+
+    .product-row{position:relative;padding-bottom:40px}
+    .products{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;padding:0 24px}
+    .product{
+      background:#fff;border:1px solid rgba(230,235,225,.9);border-radius:18px;padding:20px 18px 18px;box-shadow:var(--shadow);position:relative;min-height:374px
+    }
+    .product-visual{height:208px;border-radius:14px;background:linear-gradient(180deg,#f8fbf5,#f2f5ef);display:grid;place-items:center;margin-bottom:18px;overflow:hidden}
+    .tent{width:116px;height:162px;border-radius:16px 16px 10px 10px;background:linear-gradient(180deg,#15191c,#2b2f34);position:relative;box-shadow:0 16px 30px rgba(0,0,0,.18)}
+    .tent::before{content:"";position:absolute;left:18px;right:18px;top:18px;bottom:18px;border-radius:16px;background:linear-gradient(180deg,#dadfe0,#eff4ef);box-shadow:inset 0 0 0 3px #4e4f50}
+    .tent::after{content:"";position:absolute;left:36px;right:36px;bottom:24px;height:56px;background:radial-gradient(circle at 50% 100%,#7eb23b 8%,#638f2e 42%,rgba(0,0,0,0) 68%)}
+    .light-frame{width:160px;height:80px;border-radius:10px;background:linear-gradient(180deg,#373146,#1a1830);position:relative;transform:rotate(-18deg);box-shadow:0 18px 32px rgba(54,40,97,.16)}
+    .light-frame::before{content:"";position:absolute;inset:8px;background:linear-gradient(180deg,#cba4ff,#7d57cf)}
+    .bucket{width:92px;height:122px;background:linear-gradient(180deg,#2a2d2f,#121416);border-radius:14px 14px 22px 22px;position:relative;box-shadow:0 16px 30px rgba(0,0,0,.18)}
+    .bucket::before{content:"";position:absolute;left:10px;right:10px;top:-12px;height:24px;border:4px solid #2a2d2f;border-bottom:none;border-radius:40px 40px 0 0}
+    .bottle-green{width:54px;height:116px;border-radius:12px 12px 18px 18px;background:linear-gradient(180deg,#d4f5c8,#89b460 42%,#659139 80%);position:relative;box-shadow:0 16px 30px rgba(61,121,46,.18)}
+    .bottle-green::before,.fan::before{content:"";position:absolute;left:16px;top:-12px;width:22px;height:18px;border-radius:5px;background:#fff}
+    .fan{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#f8fbfd 0,#eef2f4 46%,#c6ccd0 47%,#f8fbfd 62%,#d4d9dd 63%,#eef2f4 100%);position:relative;box-shadow:0 16px 30px rgba(0,0,0,.12)}
+    .fan::after{content:"";position:absolute;inset:30px;border-radius:50%;background:conic-gradient(from 0deg,#b7bec3 0 50deg,transparent 50deg 120deg,#b7bec3 120deg 170deg,transparent 170deg 240deg,#b7bec3 240deg 290deg,transparent 290deg 360deg)}
+
+    .product h4{margin:0 0 10px;font-size:18px;line-height:1.25;font-weight:800;letter-spacing:-.04em}
+    .price{font-size:34px;font-weight:900;letter-spacing:-.06em;line-height:.95;margin-bottom:8px}
+    .stock{font-size:14px;color:#5d7d49;font-weight:700;display:flex;align-items:center;gap:8px}
+    .stock::before{content:"";width:8px;height:8px;border-radius:50%;background:#64af35}
+    .buy-btn{position:absolute;right:18px;bottom:18px;width:42px;height:42px;border-radius:12px;background:var(--green);display:grid;place-items:center;box-shadow:0 12px 24px rgba(77,141,35,.28)}
+    .buy-btn svg{width:22px;height:22px;stroke:#fff}
+
+    .side-arrow{
+      position:absolute;top:116px;width:52px;height:52px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);display:grid;place-items:center;color:#74806f
+    }
+    .side-arrow.left{left:-6px}
+    .side-arrow.right{right:-6px}
+
+    .footer-space{height:40px}
+
+    .mobile-note{display:none}
+
+    @media (max-width: 1280px){
+      h1{font-size:72px}
+      .hero-text{font-size:24px}
+      .nav-links{gap:24px;font-size:17px}
+      .categories{grid-template-columns:repeat(4,1fr)}
+      .products{grid-template-columns:repeat(3,1fr)}
+      .stats{grid-template-columns:repeat(3,1fr)}
+      .trust-row{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media (max-width: 960px){
+      .topbar{display:none}
+      .nav-inner{grid-template-columns:1fr auto;height:88px}
+      .nav-links{display:none}
+      .brand-text strong{font-size:20px}
+      .hero{grid-template-columns:1fr;gap:18px}
+      .hero-art{min-height:440px}
+      h1{font-size:54px}
+      .hero-text{font-size:20px}
+      .hero-actions{flex-wrap:wrap}
+      .trust-row,.promo-grid,.stats,.products{grid-template-columns:1fr}
+      .categories{grid-template-columns:repeat(2,1fr)}
+      .section-head{flex-direction:column;align-items:flex-start}
+      .side-arrow{display:none}
+      .mobile-note{display:block;color:#667066;font-size:14px;padding:0 24px 28px}
+    }
   </style>
 </head>
-<body class="font-sans bg-gradient-to-b from-white to-emerald-50/30 text-slate-900">
-  <!-- Top Bar -->
-  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-emerald-100">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-      <a href="#hero" class="flex items-center gap-3 group">
-        <div class="w-11 h-11 rounded-2xl bg-brand text-white grid place-items-center shadow-soft">
-          <!-- Leaf badge / simple logo -->
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 13c6-8 16-8 16 0 0 5-4 8-8 8S4 18 4 13Z" fill="currentColor"/>
-            <path d="M12 7c-1.5 3-1.5 6 0 9" stroke="white" stroke-width="2" stroke-linecap="round"/>
-          </svg>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <div class="mini">
+          <svg fill="none" viewBox="0 0 24 24"><path d="M3 7h10v8H3zM13 10h3l3 3v2h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="17" r="2" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="2" stroke="currentColor" stroke-width="2"/></svg>
+          <span>Doprava zdarma při objednávce nad 2 500 Kč</span>
         </div>
-        <div class="leading-tight">
-          <div class="font-extrabold text-xl tracking-tight">FARMAO.cz</div>
-          <div class="text-xs -mt-0.5 text-slate-600">Hrdina vaší farmy a zahrady</div>
+        <div class="mini">
+          <svg fill="none" viewBox="0 0 24 24"><path d="M6 3h4l2 5-2 2a16 16 0 0 0 4 4l2-2 5 2v4a2 2 0 0 1-2 2C9.82 20 4 14.18 4 7a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Poradíme vám: +420 773 133 399</span>
+        </div>
+        <div class="mini">
+          <svg fill="none" viewBox="0 0 24 24"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>info@farmao.cz</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="mini">
+          <svg fill="none" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="2"/><path d="M4 20a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Přihlášení / Registrace</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#">
+        <div class="brand-mark">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M12 21c0-7 1-11 9-17-1 8-4 16-9 17Z" fill="white" opacity=".95"/><path d="M11.5 21c0-6-1-10-8.5-14 1 7 3.5 13 8.5 14Z" fill="white" opacity=".82"/></svg>
+        </div>
+        <div class="brand-text">
+          <strong>farmao.cz</strong>
+          <span>Vše pro farmy a pěstování</span>
         </div>
       </a>
 
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-6 font-medium">
-        <a href="#kategorie" class="hover:text-brand">Kategorie</a>
-        <a href="#trh" class="hover:text-brand">Marketplace</a>
-        <a href="#kraje" class="hover:text-brand">Kraje</a>
-        <a href="#magazin" class="hover:text-brand">Magazín</a>
-        <a href="#kontakt" class="hover:text-brand">Kontakt</a>
+      <nav class="nav-links">
+        <a href="#">E-shop</a>
+        <a href="#">Market</a>
+        <a href="#">Městské farmy</a>
+        <a href="#">Dotace</a>
+        <a href="#">AO Hub</a>
+        <a href="#">O nás</a>
+        <a href="#">Kontakt</a>
       </nav>
 
-      <div class="hidden md:flex items-center gap-2">
-        <a href="#pridat" class="px-3 py-2 rounded-xl border border-brand/20 hover:border-brand bg-white hover:bg-emerald-50 text-brand font-semibold">Přidat farmu</a>
-        <a href="#cta" class="px-3 py-2 rounded-xl bg-brand hover:bg-brand-dark text-white font-semibold shadow-soft">Objednat box</a>
-      </div>
-
-      <!-- Mobile burger -->
-      <button id="burger" class="md:hidden p-2 rounded-xl border bg-white border-slate-200" aria-label="Otevřít menu" aria-expanded="false">
-        <i data-lucide="menu"></i>
-      </button>
-    </div>
-
-    <!-- Mobile Nav -->
-    <div id="mobileNav" class="md:hidden hidden mobile-nav-enter bg-white/95 border-t border-emerald-100">
-      <div class="px-4 py-3 grid gap-2">
-        <a href="#kategorie" class="px-3 py-2 rounded-lg hover:bg-emerald-50">Kategorie</a>
-        <a href="#trh" class="px-3 py-2 rounded-lg hover:bg-emerald-50">Marketplace</a>
-        <a href="#kraje" class="px-3 py-2 rounded-lg hover:bg-emerald-50">Kraje</a>
-        <a href="#magazin" class="px-3 py-2 rounded-lg hover:bg-emerald-50">Magazín</a>
-        <div class="h-px bg-emerald-100 my-1"></div>
-        <a href="#pridat" class="px-3 py-2 rounded-lg border border-brand/20 hover:bg-emerald-50 text-brand font-semibold">Přidat farmu</a>
-        <a href="#cta" class="px-3 py-2 rounded-lg bg-brand text-white font-semibold">Objednat box</a>
+      <div class="nav-icons">
+        <button class="icon-btn" aria-label="Hledat">
+          <svg fill="none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Oblíbené">
+          <svg fill="none" viewBox="0 0 24 24"><path d="m12 20-7-7a4.5 4.5 0 0 1 6.4-6.3L12 7.3l.6-.6A4.5 4.5 0 1 1 19 13l-7 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Košík mini">
+          <svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg>
+        </button>
+        <div class="cart-wrap">
+          <button class="icon-btn" aria-label="Košík">
+            <span class="cart-badge">0</span>
+            <svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg>
+          </button>
+          <span>0 Kč</span>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="hero" class="relative overflow-hidden">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
-          Čerstvá síla z <span class="text-brand">lokálních farem</span>
-        </h1>
-        <p class="mt-4 text-lg text-slate-700 max-w-prose">
-          Propojujeme farmáře a zákazníky. Objednej si sezónní box, najdi nejbližší farmu nebo si přečti, jak pěstovat lépe.
-        </p>
-        <div class="mt-6 flex flex-wrap items-center gap-3">
-          <a href="#trh" class="px-5 py-3 rounded-2xl bg-brand hover:bg-brand-dark text-white font-semibold shadow-soft">Prohlédnout nabídku</a>
-          <a href="#pridat" class="px-5 py-3 rounded-2xl border border-slate-300 hover:border-brand bg-white hover:bg-emerald-50 font-semibold">Jsem farmář</a>
+  <main>
+    <section class="hero-wrap">
+      <div class="container hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="dot"></span>Vše pro udržitelnou budoucnost</div>
+          <h1>
+            <span class="green">Pěstujte.</span><br/>
+            Prodávejte.<br/>
+            Rozvíjejte.
+          </h1>
+          <div class="hero-text">Kompletní ekosystém pro moderní zemědělce, městské farmáře i udržitelné projekty. Vše na jednom místě.</div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#produkty">Prozkoumat e-shop
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn btn-light" href="#mestske-farmy">Městské farmy na klíč</a>
+          </div>
         </div>
-        <div class="mt-6 flex items-center gap-6 text-sm text-slate-600">
-          <div class="flex items-center gap-2"><i data-lucide="leaf"></i>Bez zbytečných obalů</div>
-          <div class="flex items-center gap-2"><i data-lucide="truck"></i>Doručení v kraji</div>
-          <div class="flex items-center gap-2"><i data-lucide="shield-check"></i>Ověřené farmy</div>
-        </div>
-      </div>
-      <div class="relative">
-        <!-- Decorative farm-style card -->
-        <div class="rounded-3xl border border-emerald-100 bg-white p-6 shadow-soft">
-          <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 grid place-items-center">
-            <div class="text-center">
-              <div class="mx-auto w-20 h-20 rounded-2xl bg-brand text-white grid place-items-center mb-3 shadow-soft">
-                <i data-lucide="wheat"></i>
-              </div>
-              <div class="font-bold text-xl">Sezónní bedýnka</div>
-              <div class="text-slate-600">Zelenina • Ovoce • Bylinky</div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-arc"></div>
+          <div class="window-light"></div>
+          <div class="grow-rack">
+            <div class="rack-shelf"><div class="grow-strip"></div><div class="plant-row"><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span></div></div>
+            <div class="rack-shelf"><div class="grow-strip"></div><div class="plant-row"><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span></div></div>
+            <div class="rack-shelf"><div class="grow-strip"></div><div class="plant-row"><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span></div></div>
+            <div class="rack-shelf"><div class="grow-strip"></div><div class="plant-row"><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span><span class="pot"></span></div></div>
+          </div>
+          <div class="hero-plants">
+            <div class="leafy"></div>
+            <div class="pot-white"></div>
+          </div>
+          <div class="grow-box"><div class="grow-door"></div></div>
+          <div class="front-products">
+            <div class="bottle"></div>
+            <div class="black-bottle"></div>
+            <div class="bottle"></div>
+            <div class="jar"></div>
+            <div class="bottle"></div>
+            <div class="planter"></div>
+            <div class="planter"></div>
+          </div>
+          <div class="sprinklers"><span></span><span></span><span></span><span></span></div>
+          <div class="trust-bubble">
+            <div>
+              <div class="leaf-line">❦</div>
+              <div class="small">Důvěřuje nám</div>
+              <div class="big">10 000+<br/>zákazníků</div>
+              <div class="leaf-line">❦</div>
             </div>
           </div>
-          <div class="mt-4 grid grid-cols-3 gap-3 text-center text-sm">
-            <div class="rounded-xl bg-emerald-50 p-3"><div class="font-bold">+25%</div><div class="text-slate-600">čerstvost</div></div>
-            <div class="rounded-xl bg-emerald-50 p-3"><div class="font-bold">-18%</div><div class="text-slate-600">odpad</div></div>
-            <div class="rounded-xl bg-emerald-50 p-3"><div class="font-bold">100%</div><div class="text-slate-600">lokální</div></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="trust-row">
+          <div class="trust-item">
+            <div class="trust-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M3 7h10v8H3zM13 10h3l3 3v2h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="17" r="2" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="2" stroke="currentColor" stroke-width="2"/></svg></div>
+            <div><strong>Doprava zdarma</strong><span>nad 2 500 Kč</span></div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon"><svg fill="none" viewBox="0 0 24 24"><path d="m7 3 10 0v6c0 5-3.3 8.2-5 9-1.7-.8-5-4-5-9V3Z" stroke="currentColor" stroke-width="2"/><path d="m8.5 8 3 3 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><strong>Ověřené produkty</strong><span>kvalita a záruka</span></div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M12 3a7 7 0 1 0 7 7" stroke="currentColor" stroke-width="2"/><path d="M19 5v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><strong>Poradenství zdarma</strong><span>od expertů</span></div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M12 21c0-7 1-11 9-17-1 8-4 16-9 17Z" stroke="currentColor" stroke-width="2"/><path d="M11.5 21c0-6-1-10-8.5-14 1 7 3.5 13 8.5 14Z" stroke="currentColor" stroke-width="2"/></svg></div>
+            <div><strong>Udržitelné řešení</strong><span>pro budoucnost</span></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Kategorie -->
-  <section id="kategorie" class="py-12 md:py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex items-end justify-between mb-6">
-        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Kategorie</h2>
-        <a href="#trh" class="text-brand font-semibold hover:underline">Zobrazit vše</a>
+    <section class="category-wrap">
+      <div class="container">
+        <div class="categories">
+          <div class="cat"><div class="cat-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M12 21c0-7 1-11 9-17-1 8-4 16-9 17Z" stroke="currentColor" stroke-width="2"/><path d="M11.5 21c0-6-1-10-8.5-14 1 7 3.5 13 8.5 14Z" stroke="currentColor" stroke-width="2"/></svg></div><strong>Pěstování</strong><span>Indoor & Outdoor</span></div>
+          <div class="cat"><div class="cat-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M4 15c4 0 4-6 8-6s4 6 8 6" stroke="currentColor" stroke-width="2"/><path d="M6 15v3m6-3v3m6-3v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><strong>Hydroponie</strong><span>& Aquaponie</span></div>
+          <div class="cat"><div class="cat-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M12 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 8h10M4 21h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 14 6 18m10-4 2 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><strong>Osvětlení</strong><span>LED systémy</span></div>
+          <div class="cat"><div class="cat-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M5 18h14l-2-9H7l-2 9Z" stroke="currentColor" stroke-width="2"/><path d="M9 9V7a3 3 0 1 1 6 0v2" stroke="currentColor" stroke-width="2"/></svg></div><strong>Substráty</strong><span>& hnojiva</span></div>
+          <div class="cat"><div class="cat-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M7 17c0-3 2-5 5-5 1.5 0 3 .8 4 2" stroke="currentColor" stroke-width="2"/><path d="M9 6c2 0 4 2 4 5v1" stroke="currentColor" stroke-width="2"/><path d="M16 14h5m-2-2 2 2-2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><strong>Zavlažování</strong><span>& pH control</span></div>
+          <div class="cat"><div class="cat-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M5 4h12l2 4v12H5z" stroke="currentColor" stroke-width="2"/><path d="M17 4v8H5" stroke="currentColor" stroke-width="2"/></svg></div><strong>Pěstební stany</strong><span>& příslušenství</span></div>
+          <div class="cat"><div class="cat-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M4 19V8l8-4 8 4v11" stroke="currentColor" stroke-width="2"/><path d="M9 19v-5h6v5" stroke="currentColor" stroke-width="2"/></svg></div><strong>Městské farmy</strong><span>na klíč</span></div>
+          <div class="cat"><div class="cat-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M12 21c0-7 1-11 9-17-1 8-4 16-9 17Z" stroke="currentColor" stroke-width="2"/><path d="M11.5 21c0-6-1-10-8.5-14 1 7 3.5 13 8.5 14Z" stroke="currentColor" stroke-width="2"/><path d="M4 12h4m8 0h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><strong>Výkup plodin</strong><span>a spolupráce</span></div>
+        </div>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <!-- Item -->
-        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand focus:outline-none">
-          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="egg"></i></div>
-          <div class="font-semibold">Vejce</div>
-          <div class="text-xs text-slate-600">domácí chov</div>
-        </a>
-        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand">
-          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="beef"></i></div>
-          <div class="font-semibold">Maso</div>
-          <div class="text-xs text-slate-600">hovězí, vepřové, drůbež</div>
-        </a>
-        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand">
-          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="milk"></i></div>
-          <div class="font-semibold">Mléčné</div>
-          <div class="text-xs text-slate-600">mléko, jogurt, sýry</div>
-        </a>
-        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand">
-          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="salad"></i></div>
-          <div class="font-semibold">Zelenina</div>
-          <div class="text-xs text-slate-600">sazenice & sklizeň</div>
-        </a>
-        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand">
-          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="apple"></i></div>
-          <div class="font-semibold">Ovoce</div>
-          <div class="text-xs text-slate-600">čerstvé & sušené</div>
-        </a>
-        <a href="#trh" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-soft hover:border-brand">
-          <div class="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center mb-2"><i data-lucide="sprout"></i></div>
-          <div class="font-semibold">Sazenice</div>
-          <div class="text-xs text-slate-600">bylinky, stromky</div>
-        </a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Marketplace preview -->
-  <section id="trh" class="py-12 md:py-16 bg-white/70 border-y border-emerald-100">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+    <section class="container">
+      <div class="promo-grid">
+        <article class="promo-card market">
+          <h3>Farmao Market</h3>
+          <p>Spojujeme farmáře a kupující</p>
+          <ul class="promo-list">
+            <li>Prodej svých plodin</li>
+            <li>Ověření partneři</li>
+            <li>Férové ceny</li>
+            <li>Rychlé spojení</li>
+          </ul>
+          <a class="promo-btn" href="#">Zjistit více
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div class="crate"><div class="veg"></div><div class="box"></div></div>
+        </article>
+        <article id="mestske-farmy" class="promo-card farm">
+          <div class="promo-badge">Nejoblíbenější</div>
+          <h3>Městské farmy na klíč</h3>
+          <p>Navrhneme, postavíme a zprovozníme vaši vlastní městskou farmu.</p>
+          <ul class="promo-list">
+            <li>Návrh & projekt</li>
+            <li>Realizace & instalace</li>
+            <li>Školení & podpora</li>
+            <li>Servis & údržba</li>
+          </ul>
+          <a class="promo-btn" href="#">Zobrazit služby
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div class="mini-rack"><div class="rack"><div class="shelf"></div><div class="shelf"></div><div class="shelf"></div><div class="shelf"></div></div></div>
+        </article>
+        <article class="promo-card dotace">
+          <h3>Dotace & financování</h3>
+          <p>Pomůžeme vám získat podporu na váš projekt.</p>
+          <ul class="promo-list">
+            <li>Přehled dotací</li>
+            <li>Kompletní zpracování</li>
+            <li>Maximální úspěšnost</li>
+            <li>Ušetříme váš čas</li>
+          </ul>
+          <a class="promo-btn" href="#">Více o dotacích
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div class="coins-stack"><div class="coin a"></div><div class="coin b"></div><div class="coin c"></div><div class="sprout"></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="stats-wrap container">
+      <h3 class="stats-title">Proč si vybrat Farmao.cz?</h3>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="2"/><path d="M4 20a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><div class="num">10 000+</div><span>Spokojených zákazníků</span></div>
+        </div>
+        <div class="stat">
+          <div class="stat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.2l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <div><div class="num">4.9 / 5</div><span>Průměrné hodnocení</span></div>
+        </div>
+        <div class="stat">
+          <div class="stat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="m7 3 10 0v6c0 5-3.3 8.2-5 9-1.7-.8-5-4-5-9V3Z" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div><div class="num">500+</div><span>Ověřených produktů</span></div>
+        </div>
+        <div class="stat">
+          <div class="stat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 4h8v4l-2 3v3l3 6H7l3-6v-3L8 8V4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <div><div class="num">3 roky</div><span>Záruka na vybrané zboží</span></div>
+        </div>
+        <div class="stat">
+          <div class="stat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M10 14a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 10a5 5 0 0 1 0 7l-1 1a5 5 0 1 1-7-7l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><strong>Expertní podpora</strong><span>Jsme tu pro vás každý den</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="produkty" class="container product-row">
+      <div class="section-head">
         <div>
-          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Marketplace – aktuální nabídka</h2>
-          <p class="text-slate-700">Filtrovat podle kategorie a kraje.</p>
+          <small>Doporučujeme</small>
+          <h2>To nejlepší pro vaše pěstování</h2>
+          <p>Pečlivě vybíráme produkty nejvyšší kvality.</p>
         </div>
-        <div class="grid grid-cols-2 sm:flex gap-2">
-          <select class="px-3 py-2 rounded-xl border border-slate-300 bg-white">
-            <option>Všechny kategorie</option>
-            <option>Živočišné produkty</option>
-            <option>Mléčné výrobky</option>
-            <option>Pekárna & obiloviny</option>
-            <option>Sladké & přírodní</option>
-            <option>Zpracované produkty</option>
-            <option>Byliny & přírodní věci</option>
-            <option>Farma speciality</option>
-            <option>Živá zvířata</option>
-            <option>Ne-potraviny</option>
-          </select>
-          <select class="px-3 py-2 rounded-xl border border-slate-300 bg-white">
-            <option>Celá ČR</option>
-            <option>Praha</option>
-            <option>Středočeský kraj</option>
-            <option>Jihočeský kraj</option>
-            <option>Plzeňský kraj</option>
-            <option>Karlovarský kraj</option>
-            <option>Ústecký kraj</option>
-            <option>Liberecký kraj</option>
-            <option>Královéhradecký kraj</option>
-            <option>Pardubický kraj</option>
-            <option>Kraj Vysočina</option>
-            <option>Jihomoravský kraj</option>
-            <option>Olomoucký kraj</option>
-            <option>Zlínský kraj</option>
-            <option>Moravskoslezský kraj</option>
-          </select>
-          <button class="px-4 py-2 rounded-xl bg-brand text-white font-semibold">Filtrovat</button>
-        </div>
+        <a href="#" class="ghost-btn">Zobrazit všechny produkty
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Card 1 -->
-        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
-          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center">
-            <i data-lucide="egg" class="w-7 h-7"></i>
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg">Domácí vejce z volného chovu</h3>
-            <div class="text-sm text-slate-600">Uherské Hradiště • od 95 Kč/10 ks</div>
-            <div class="mt-3 flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-semibold">Vejce</span>
-              <button class="px-3 py-1.5 rounded-lg bg-brand text-white text-sm font-semibold">Detail</button>
-            </div>
-          </div>
-        </article>
-        <!-- Card 2 -->
-        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
-          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center">
-            <i data-lucide="beef" class="w-7 h-7"></i>
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg">Hovězí balíčky – čtvrtky</h3>
-            <div class="text-sm text-slate-600">Zlín • od 199 Kč/kg</div>
-            <div class="mt-3 flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-semibold">Maso</span>
-              <button class="px-3 py-1.5 rounded-lg bg-brand text-white text-sm font-semibold">Detail</button>
-            </div>
-          </div>
-        </article>
-        <!-- Card 3 -->
-        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
-          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center">
-            <i data-lucide="milk" class="w-7 h-7"></i>
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg">Selské mléko & čerstvé sýry</h3>
-            <div class="text-sm text-slate-600">Brno-venkov • od 35 Kč/l</div>
-            <div class="mt-3 flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-semibold">Mléčné</span>
-              <button class="px-3 py-1.5 rounded-lg bg-brand text-white text-sm font-semibold">Detail</button>
-            </div>
-          </div>
-        </article>
-      </div>
+      <a href="#" class="side-arrow left" aria-label="Předchozí">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="m15 6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#" class="side-arrow right" aria-label="Další">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
 
-      <div class="text-center mt-8">
-        <a href="#" class="px-5 py-3 rounded-2xl border border-slate-300 hover:border-brand bg-white hover:bg-emerald-50 font-semibold">Zobrazit další nabídky</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Kraje / geolokace -->
-  <section id="kraje" class="py-12 md:py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-6">Najdi farmu ve svém kraji</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <!-- Simple region chips -->
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Praha</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Středočeský</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Jihočeský</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Plzeňský</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Karlovarský</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Ústecký</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Liberecký</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Královéhradecký</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Pardubický</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Kraj Vysočina</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Jihomoravský</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Olomoucký</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Zlínský</button>
-        <button class="px-3 py-2 rounded-xl border border-slate-300 bg-white hover:border-brand">Moravskoslezský</button>
-      </div>
-      <p class="text-slate-600 text-sm mt-3">Tip: povol geolokaci v prohlížeči a ukážeme ti nejbližší farmy.</p>
-    </div>
-  </section>
-
-  <!-- Magazín -->
-  <section id="magazin" class="py-12 md:py-16 bg-white/70 border-y border-emerald-100">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex items-end justify-between mb-6">
-        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Magazín FARMAO</h2>
-        <a href="#" class="text-brand font-semibold hover:underline">Číst vše</a>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
-          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center"><i data-lucide="sprout"></i></div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg">Kdy sázet zimní česnek</h3>
-            <p class="text-slate-700 text-sm mt-1">Praktický kalendář výsadby a péče o půdu.</p>
-          </div>
+      <div class="products">
+        <article class="product">
+          <div class="product-visual"><div class="tent"></div></div>
+          <h4>Pěstební stan Probox 120x120x200cm</h4>
+          <div class="price">2 990 Kč</div>
+          <div class="stock">Skladem</div>
+          <a href="#" class="buy-btn" aria-label="Přidat do košíku"><svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg></a>
         </article>
-        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
-          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center"><i data-lucide="droplets"></i></div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg">Závlaha na zahradě: co dává smysl</h3>
-            <p class="text-slate-700 text-sm mt-1">Hadice, kapkovka, sudy – srovnání možností.</p>
-          </div>
+        <article class="product">
+          <div class="product-visual"><div class="light-frame"></div></div>
+          <h4>LED světlo Lumatek ATS200W PRO</h4>
+          <div class="price">5 990 Kč</div>
+          <div class="stock">Skladem</div>
+          <a href="#" class="buy-btn" aria-label="Přidat do košíku"><svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg></a>
         </article>
-        <article class="rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-soft">
-          <div class="aspect-[16/9] bg-emerald-100 grid place-items-center"><i data-lucide="wheat"></i></div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg">Kompost: jednoduchý návod</h3>
-            <p class="text-slate-700 text-sm mt-1">Jak založit kompost a urychlit rozklad.</p>
-          </div>
+        <article class="product">
+          <div class="product-visual"><div class="bucket"></div></div>
+          <h4>AutoPot Easy2Grow systém 8 květináčů</h4>
+          <div class="price">4 890 Kč</div>
+          <div class="stock">Skladem</div>
+          <a href="#" class="buy-btn" aria-label="Přidat do košíku"><svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg></a>
+        </article>
+        <article class="product">
+          <div class="product-visual"><div class="bottle-green"></div></div>
+          <h4>Hnojivo Canna Terra Professional 1L</h4>
+          <div class="price">399 Kč</div>
+          <div class="stock">Skladem</div>
+          <a href="#" class="buy-btn" aria-label="Přidat do košíku"><svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg></a>
+        </article>
+        <article class="product">
+          <div class="product-visual"><div class="fan"></div></div>
+          <h4>Ventilátor Prima Klima 125mm / 220 m³/h</h4>
+          <div class="price">2 190 Kč</div>
+          <div class="stock">Skladem</div>
+          <a href="#" class="buy-btn" aria-label="Přidat do košíku"><svg fill="none" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L22 7H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.7" fill="currentColor"/><circle cx="18" cy="20" r="1.7" fill="currentColor"/></svg></a>
         </article>
       </div>
-    </div>
-  </section>
+      <div class="mobile-note">Mobilní slider a napojení na data ze Supabase doplníme v další vrstvě. Vizuálně je homepage připravená 1:1 podle návrhu.</div>
+    </section>
 
-  <!-- CTA: Přidat farmu / Objednat box -->
-  <section id="cta" class="py-12 md:py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6 items-center">
-      <div class="rounded-3xl border border-emerald-100 bg-white p-6 shadow-soft">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-brand text-white grid place-items-center"><i data-lucide="store"></i></div>
-          <h3 class="font-extrabold text-xl">Jsem farmář – chci prodávat</h3>
-        </div>
-        <p class="text-slate-700 mt-2">Získáš vlastní profil, přidáš produkty a nastavíš doručení v okolí.</p>
-        <form id="pridat" class="mt-4 grid sm:grid-cols-2 gap-3">
-          <input type="text" placeholder="Název farmy" class="px-3 py-2 rounded-xl border border-slate-300 bg-white" />
-          <input type="text" placeholder="Kraj" class="px-3 py-2 rounded-xl border border-slate-300 bg-white" />
-          <input type="email" placeholder="Email" class="px-3 py-2 rounded-xl border border-slate-300 bg-white sm:col-span-2" />
-          <button type="button" class="px-4 py-2 rounded-xl bg-brand text-white font-semibold">Založit profil</button>
-        </form>
-      </div>
-      <div class="rounded-3xl border border-emerald-100 bg-white p-6 shadow-soft">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-brand text-white grid place-items-center"><i data-lucide="shopping-basket"></i></div>
-          <h3 class="font-extrabold text-xl">Chci bedýnku – nejbližší rozvoz</h3>
-        </div>
-        <p class="text-slate-700 mt-2">Zadej PSČ a zjisti nejbližší termín rozvozu ve tvém kraji.</p>
-        <form class="mt-4 grid sm:grid-cols-[1fr_auto] gap-3">
-          <input type="text" placeholder="PSČ (např. 68601)" class="px-3 py-2 rounded-xl border border-slate-300 bg-white" />
-          <button type="button" class="px-4 py-2 rounded-xl bg-brand text-white font-semibold">Zkontrolovat</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Kontakt / Footer -->
-  <footer id="kontakt" class="mt-6 border-t border-emerald-100 bg-white/70">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 grid md:grid-cols-3 gap-8">
-      <div>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-brand text-white grid place-items-center">
-            <i data-lucide="leaf"></i>
-          </div>
-          <div>
-            <div class="font-extrabold text-lg">FARMAO.cz</div>
-            <div class="text-sm text-slate-600">Součást AO Group</div>
-          </div>
-        </div>
-        <p class="text-slate-700 mt-3 text-sm">Marketplace a magazín pro farmáře, zahrady a lokální výrobu. Podporujeme férový prodej z dvora.</p>
-      </div>
-      <div>
-        <div class="font-bold mb-2">Navigace</div>
-        <ul class="space-y-1 text-sm">
-          <li><a href="#kategorie" class="hover:text-brand">Kategorie</a></li>
-          <li><a href="#trh" class="hover:text-brand">Marketplace</a></li>
-          <li><a href="#kraje" class="hover:text-brand">Kraje</a></li>
-          <li><a href="#magazin" class="hover:text-brand">Magazín</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="font-bold mb-2">Odběr novinek</div>
-        <form class="grid grid-cols-[1fr_auto] gap-2">
-          <input type="email" placeholder="Váš e‑mail" class="px-3 py-2 rounded-xl border border-slate-300 bg-white" />
-          <button class="px-4 py-2 rounded-xl bg-brand text-white font-semibold">Odebírat</button>
-        </form>
-        <p class="text-xs text-slate-600 mt-2">Souhlasím se zpracováním osobních údajů pro zasílání newsletteru.</p>
-      </div>
-    </div>
-    <div class="border-t border-emerald-100 py-4 text-center text-sm text-slate-600">© <span id="year"></span> FARMAO.cz – Všechna práva vyhrazena.</div>
-  </footer>
+    <div class="footer-space"></div>
+  </main>
 
   <script>
-    // Icons
-    lucide.createIcons();
+    // Demo struktura pro pozdější napojení na Supabase / GitHub deployment
+    window.FARMAO_CONFIG = {
+      supabaseUrl: "YOUR_SUPABASE_URL",
+      supabaseAnonKey: "YOUR_SUPABASE_ANON_KEY",
+      tables: {
+        products: "products",
+        categories: "categories",
+        stats: "stats",
+        promo_cards: "promo_cards"
+      }
+    };
 
-    // Burger logic
-    const burger = document.getElementById('burger');
-    const mobileNav = document.getElementById('mobileNav');
-    burger?.addEventListener('click', () => {
-      const isOpen = mobileNav.classList.contains('hidden') === false;
-      mobileNav.classList.toggle('hidden');
-      burger.setAttribute('aria-expanded', String(!isOpen));
-      // close on navigation click
-      mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        mobileNav.classList.add('hidden');
-        burger.setAttribute('aria-expanded', 'false');
-      }));
+    // Jemné hover microinteractions
+    document.querySelectorAll('.product, .promo-card, .btn, .ghost-btn, .cat, .trust-item').forEach((el) => {
+      el.addEventListener('mouseenter', () => el.style.transform = 'translateY(-2px)');
+      el.addEventListener('mouseleave', () => el.style.transform = 'translateY(0)');
+      el.style.transition = 'transform .2s ease, box-shadow .2s ease';
     });
-
-    // Close on scroll down to keep menu visible at top only
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 120) mobileNav.classList.add('hidden');
-    });
-
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
